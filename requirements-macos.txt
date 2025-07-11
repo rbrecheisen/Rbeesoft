@@ -1,0 +1,4 @@
+poetry
+pytest
+pyside6>=6.9
+pendulum
