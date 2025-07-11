@@ -13,7 +13,7 @@ packages = [
 python = ">=3.9,<3.12"
 
 [tool.poetry.scripts]
-rbeesoft = "rbeesoft.main:main"
+rbeesoft = "rbeesoft.app:main"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
