@@ -15,16 +15,17 @@ from rbeesoft.ui.utils import resource_path, version
 
 
 class MainWindow(QMainWindow):
-    def __init__(self, title, app_name, icon):
+    def __init__(self, title, app_name, version, icon):
         super(MainWindow, self).__init__()
         self._title = title
         self._app_name = app_name
+        self._version = version
         self._icon = icon
         self._settings = None
         self.init_window()
 
     def init_window(self):
-        self.setWindowTitle(f'{self.title()} {version(self.app_name())}')
+        self.setWindowTitle(f'{self.title()} {self.version()}')
         # self.setWindowIcon(QIcon(resource_path(os.path.join(
         #     Constants.RBEESOFT_RESOURCES_IMAGES_ICONS_DIR, Constants.RBEESOFT_RESOURCES_ICON))))
         self.setWindowIcon(self.icon())
@@ -38,6 +39,9 @@ class MainWindow(QMainWindow):
     
     def app_name(self):
         return self._app_name
+    
+    def version(self):
+        return self._version
     
     def icon(self):
         return self._icon
