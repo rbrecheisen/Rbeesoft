@@ -15,19 +15,32 @@ from rbeesoft.ui.utils import resource_path, version
 
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, title, app_name, icon):
         super(MainWindow, self).__init__()
+        self._title = title
+        self._app_name = app_name
+        self._icon = icon
         self._settings = None
         self.init_window()
 
     def init_window(self):
-        self.setWindowTitle(f'{Constants.RBEESOFT_WINDOW_TITLE} {version(Constants.RBEESOFT_NAME)}')
-        self.setWindowIcon(QIcon(resource_path(os.path.join(
-            Constants.RBEESOFT_RESOURCES_IMAGES_ICONS_DIR, Constants.RBEESOFT_RESOURCES_ICON))))
+        self.setWindowTitle(f'{self.title()} {version(self.app_name())}')
+        # self.setWindowIcon(QIcon(resource_path(os.path.join(
+        #     Constants.RBEESOFT_RESOURCES_IMAGES_ICONS_DIR, Constants.RBEESOFT_RESOURCES_ICON))))
+        self.setWindowIcon(self.icon())
         if not self.load_geometry_and_state():
             self.set_default_size_and_position()
 
     # GETTERS
+
+    def title(self):
+        return self._title
+    
+    def app_name(self):
+        return self._app_name
+    
+    def icon(self):
+        return self._icon
 
     def settings(self):
         if not self._settings:
