@@ -28,7 +28,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(f'{self.title()} {self.version()}')
         # self.setWindowIcon(QIcon(resource_path(os.path.join(
         #     Constants.RBEESOFT_RESOURCES_IMAGES_ICONS_DIR, Constants.RBEESOFT_RESOURCES_ICON))))
-        self.setWindowIcon(self.icon())
+        if self.icon():
+            self.setWindowIcon(self.icon())
         if not self.load_geometry_and_state():
             self.set_default_size_and_position()
 
