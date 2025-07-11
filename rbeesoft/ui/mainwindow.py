@@ -51,9 +51,9 @@ class MainWindow(QMainWindow):
 
     def save_geometry_and_state(self):
         self.settings().set(
-            constants.RBEESOFT_WINDOW_GEOMETRY_KEY, self.saveGeometry())
+            Constants.RBEESOFT_WINDOW_GEOMETRY_KEY, self.saveGeometry())
         self.settings().set(
-            constants.RBEESOFT_WINDOW_STATE_KEY, self.saveState())
+            Constants.RBEESOFT_WINDOW_STATE_KEY, self.saveState())
 
     def set_default_size_and_position(self):
         self.resize(Constants.RBEESOFT_WINDOW_W, Constants.RBEESOFT_WINDOW_H)
