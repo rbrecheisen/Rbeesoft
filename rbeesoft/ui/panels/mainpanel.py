@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (
     QDockWidget,
 )
 
-import rbeesoft.ui.constants as constants
+from rbeesoft.ui.constants import Constants
 
 from rbeesoft.ui.settings import Settings
 from rbeesoft.ui.panels.stackedpanel import StackedPanel
@@ -34,7 +34,7 @@ class MainPanel(QDockWidget):
         layout.addWidget(self.stacked_panel())
         container = QWidget()
         container.setLayout(layout)
-        self.setObjectName(constants.RBEESOFT_MAIN_PANEL_NAME)
+        self.setObjectName(Constants.RBEESOFT_MAIN_PANEL_NAME)
         self.setWidget(container)
 
     # GETTERS
@@ -47,13 +47,13 @@ class MainPanel(QDockWidget):
     def title_label(self):
         if not self._title_label:
             self._title_label = QLabel('')
-            self._title_label.setStyleSheet(constants.RBEESOFT_MAIN_PANEL_NAME_TITLE_LABEL_STYLESHEET)
+            self._title_label.setStyleSheet(Constants.RBEESOFT_MAIN_PANEL_NAME_TITLE_LABEL_STYLESHEET)
         return self._title_label
     
     def donate_button(self):
         if not self._donate_button:
-            self._donate_button = QPushButton(constants.RBEESOFT_DONATE_BUTTON_TEXT)
-            self._donate_button.setStyleSheet(constants.RBEESOFT_DONATE_BUTTON_STYLESHEET)
+            self._donate_button = QPushButton(Constants.RBEESOFT_DONATE_BUTTON_TEXT)
+            self._donate_button.setStyleSheet(Constants.RBEESOFT_DONATE_BUTTON_STYLESHEET)
             self._donate_button.clicked.connect(self.handle_donate_button)
         return self._donate_button
     
@@ -78,4 +78,4 @@ class MainPanel(QDockWidget):
     # EVENT HANDLERS
 
     def handle_donate_button(self):
-        webbrowser.open(constants.RBEESOFT_DONATE_URL)
+        webbrowser.open(Constants.RBEESOFT_DONATE_URL)

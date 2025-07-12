@@ -9,8 +9,8 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-def version(app_name):
-    with open(resource_path(f'{app_name}/resources/VERSION'), 'r') as f:
+def version(version_file_path):
+    with open(version_file_path, 'r') as f:
         return f.readline().strip()
 
 

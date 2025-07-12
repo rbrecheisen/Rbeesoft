@@ -1,6 +1,6 @@
 from PySide6.QtCore import QSettings
 
-import rbeesoft.ui.constants as constants
+from rbeesoft.ui.constants import Constants
 
 
 class Settings(QSettings):
@@ -8,19 +8,19 @@ class Settings(QSettings):
         super(Settings, self).__init__(
             QSettings.IniFormat, 
             QSettings.UserScope, 
-            constants.RBEESOFT_BUNDLE_IDENTIFIER, 
-            constants.RBEESOFT_NAME,
+            Constants.RBEESOFT_BUNDLE_IDENTIFIER, 
+            Constants.RBEESOFT_NAME,
         )
 
     def prepend_bundle_identifier_and_name(self, name):
         return '{}.{}.{}'.format(
-            constants.RBEESOFT_BUNDLE_IDENTIFIER, 
-            constants.RBEESOFT_NAME,
+            Constants.RBEESOFT_BUNDLE_IDENTIFIER, 
+            Constants.RBEESOFT_NAME,
             name,
         )
 
     def get(self, name, default=None):
-        if not name.startswith(constants.RBEESOFT_BUNDLE_IDENTIFIER):
+        if not name.startswith(Constants.RBEESOFT_BUNDLE_IDENTIFIER):
             name = self.prepend_bundle_identifier_and_name(name)
         value = self.value(name)
         if value is None or value == '':
