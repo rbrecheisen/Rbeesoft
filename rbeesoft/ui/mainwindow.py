@@ -5,13 +5,12 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import (
     QGuiApplication,
-    QIcon,
+    QAction,
 )
 from PySide6.QtCore import Qt, QByteArray
 
 from rbeesoft.ui.constants import Constants
 from rbeesoft.ui.settings import Settings
-from rbeesoft.ui.utils import resource_path, version
 
 
 class MainWindow(QMainWindow):
@@ -24,16 +23,7 @@ class MainWindow(QMainWindow):
         self._settings = None
         self.init_window()
 
-    def init_window(self):
-        self.setWindowTitle(f'{self.title()} {self.version()}')
-        # self.setWindowIcon(QIcon(resource_path(os.path.join(
-        #     Constants.RBEESOFT_RESOURCES_IMAGES_ICONS_DIR, Constants.RBEESOFT_RESOURCES_ICON))))
-        if self.icon():
-            self.setWindowIcon(self.icon())
-        if not self.load_geometry_and_state():
-            self.set_default_size_and_position()
-
-    # GETTERS
+    # GET
 
     def title(self):
         return self._title
@@ -52,6 +42,32 @@ class MainWindow(QMainWindow):
             self._settings = Settings()
         return self._settings
     
+    # SET
+
+    def set_status(self, message):
+        self.statusBar().showMessage(message)
+
+    # INITIALIZATION
+    
+    def init_window(self):
+        self.setWindowTitle(f'{self.title()} {self.version()}')
+        if self.icon():
+            self.setWindowIcon(self.icon())
+        if not self.load_geometry_and_state():
+            self.set_default_size_and_position()
+        self.init_app_menu()
+
+    def init_app_menu(self):
+        exit_action = QAction(Constants.RBEESOFT_APP_MENU_EXIT_ACTION_TEXT, self)
+        exit_action.triggered.connect(self.close)
+        app_menu = self.menuBar().addMenu(Constants.RBEESOFT_APP_MENU_TEXT)
+        app_menu.addAction(exit_action)
+
+    def init_status_bar(self):
+        self.set_status(Constants.RBEESOFT_STATUS_READY)
+
+    # EVENT HANDLERS
+
     def closeEvent(self, event):
         self.save_geometry_and_state()
         return super().closeEvent(event)
